@@ -15,6 +15,9 @@ const isNumeric = n => !!Number(n);
 router.get("/:idVideogame", async(req,res)=>{
    try{
     const { idVideogame } = req.params;
+    const { creado } = req.query;
+    console.log('creado es');
+    console.log(creado);
     
     if(idVideogame){
         if(isNumeric(idVideogame)){
@@ -28,6 +31,7 @@ router.get("/:idVideogame", async(req,res)=>{
               copyVideogame.name = videogame.name;
               copyVideogame.rating = videogame.rating;
               copyVideogame.released = videogame.released;
+              copyVideogame.website = videogame.website;
               copyVideogame.genres = videogame.genres.map(e => e.name);
               copyVideogame.platforms = videogame.platforms;
               copyVideogame.background_image = videogame.background_image;              
@@ -36,7 +40,6 @@ router.get("/:idVideogame", async(req,res)=>{
 
     
            //const bdData =  await Videogame.findByPk(idVideogame);  FALTA 
-
 
             return res.status(200).json({copyVideogame});           
         }

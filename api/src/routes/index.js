@@ -5,6 +5,7 @@ const { Router } = require('express');
 const videogamesRouter = require('./videogames');
 const vgDetallesRouter = require('./vgdetalle');
 const genresRouter = require('./genres');
+const genresDbRouter = require('./genresDb');
 
 const router = Router();
 
@@ -19,6 +20,7 @@ router.get("/", (req,res)=>{//este general funciono ok
 router.use('/videogames', videogamesRouter);
 router.use('/videogames/', vgDetallesRouter);
 router.use('/genres', genresRouter);
+router.use('/genresdb', genresDbRouter);
 
 
 module.exports = router;

@@ -13,27 +13,53 @@ const router = Router();
 const getGenresFromApi = async () => {
   try {
     let resultData = await  axios('https://api.rawg.io/api/genres?key=928a106257314462a3a43bf37033df35')  
-    let newResult = resultData.data.results;
-    let arrayGenres = newResult.map(genre => {
+    let result = resultData.data.results;
+    let arrayGenres = result.map(genre => {
        return {
            id: genre.id,
            name: genre.name             
        }
    })   
       await Genre.bulkCreate(arrayGenres);//allows you to insert multiple records to your database table with a single function call
+      console.log('desde back getgenresfromapi')
+      console.log(arrayGenres) 
       return arrayGenres;
   } catch (error) {
       return {error: error.message}
   }
 };
 
-router.get("/", async (req,res)=>{ //ok funciona
+const getGenresFromDb = async () => {
+    try {
+          const genresBd = await Genre.findAll();          
+          return genresBd;         
+         
+      }catch (error) {
+      return { error: error.message };
+    } 
+  };
+
+ 
+  /*router.get("/db", async (req,res)=>{  
     try{   
-     let arrayGenres = await getGenresFromApi();
-      return res.status(201).send({ arrayGenres});
+     const genresDb = await getGenresFromDb();
+     console.log(genresDb)
+      return res.status(200).send({ genresDb });
     }catch(error){
         return res.status(400).json({"Error": error.message});
     }    
 });
+*/
+
+router.get("/", async (req,res)=>{ //ok funciona
+    try{   
+     let genres = await getGenresFromApi();
+      return res.status(201).send({ genres});
+    }catch(error){
+        return res.status(400).json({"Error": error.message});
+    }    
+});
+
+
 
 module.exports = router;

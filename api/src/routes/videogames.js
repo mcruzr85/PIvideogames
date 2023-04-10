@@ -1,6 +1,6 @@
 const axios = require("axios");
 const { Op } = require("sequelize");
-const { Videogame } = require("../db");
+const { Videogame, VideogameGenre, Genre } = require("../db");
 
 const { Router } = require("express");
 const router = Router();
@@ -26,110 +26,163 @@ const getVideogamesFromApi = async (name) => {
     let arrayApi = [];
     let videogamesApi = [];
     let cant = 0;
-    
+
     if (name) {
+      console.log("entre al metodo con name antes de axios");
       apiData = await axios(
         `https://api.rawg.io/api/games?search=${name}&key=928a106257314462a3a43bf37033df35`
       );
-      arrayApi = apiData.data.results;      
-     
+      arrayApi = apiData.data.results;
+
       if (arrayApi.length) {
         videogamesApi = arrayApi.map((vg) => {
           return {
             id: vg.id,
             name: vg.name,
+            genres: vg.genres.map((g) => g.name).join("-"),
             released: vg.released,
             rating: vg.rating,
+            website: vg.website,
             background_image: vg.background_image,
           };
         });
-        
-      }else {
+        console.log("entre al metodo con name despues de axios");
+      } else {
         return [];
-     }
-      
-    }else{
-
-        //si no hay name traigo 100
-   //let arrayApi = [];
-    for (let i = 1; i < 6; i++) {
+      }
+    } else {
+      //si no hay name traigo 100
+      //let arrayApi = [];
+      for (let i = 5; i < 10; i++) {
         apiData = await axios(
           `https://api.rawg.io/api/games?key=928a106257314462a3a43bf37033df35&page=${i}`
         );
         arrayApi.push(apiData);
       }
-     
+
       if (arrayApi.length) {
-      arrayApi = await Promise.all(arrayApi);
+        arrayApi = await Promise.all(arrayApi);
 
-      videogamesApi = arrayApi.map((response) =>
-        response.data.results.map((vg) => {
-          return {
-            id: vg.id,
-            name: vg.name,
-            released: vg.released,
-            rating: vg.rating,
-            description: vg.description,
-            background_image: vg.background_image,
-          };
-        })
-      );
-      videogamesApi = videogamesApi.flat(); 
-      //esto es pq era un array de arrays y con esto se junta en un solo []
-
-    }  else{
+        videogamesApi = arrayApi.map((response) =>
+          response.data.results.map((vg) => {
+            return {
+              id: vg.id,
+              name: vg.name,
+              released: vg.released,
+              rating: vg.rating,
+              website: vg.website,
+              description: vg.description,
+              background_image: vg.background_image,
+              genres: vg.genres.map((g) => g.name).join("-"),
+            };
+          })
+        );
+        videogamesApi = videogamesApi.flat();
+        //esto es pq era un array de arrays y con esto se junta en un solo []
+      } else {
         return [];
-    }  
-  }
-  
-  cant = videogamesApi.length;  
-  return videogamesApi;
-
-} catch (error) {
-    return { error: error.message };
-  }
-};
-
-
-const getVideogamesFromDb = async (name) => {
-  try {
-    if (!name) {
-        const vgsBd = await Videogame.findAll();       
-        return vgsBd; 
-      
-    }else{
-        const { count, rows } = await Videogame.findAndCountAll({
-            where: { name: { [Op.iLike]: `%${name}%` } },
-          });
-          return rows;      
+      }
     }
-     
+
+    cant = videogamesApi.length;
+    return videogamesApi;
   } catch (error) {
     return { error: error.message };
   }
 };
 
+const getVideogamesFromDb = async (name) => {
+  //ojo me falta buscar  genero de cada vg
+  try {
+    if (!name) {
+      const vgsBd = await Videogame.findAll({
+        //este funciona con un [] de generos
+        //where: { name },
+        include: {
+          model: Genre,
+          through: {
+            attributes: [],
+          },
+        },
+      });
+      return vgsBd;
 
+    } else {
+     /* const { count, rows } = await Videogame.findAndCountAll({
+        where: { name: { [Op.iLike]: `%${name}%` } },
+      });
+      return rows;*/
+      const vgsBd = await Videogame.findAll({
+        where: { name: { [Op.iLike]: `%${name}%` } },
+        include: {
+          model: Genre,
+          through: {
+            attributes: [],
+          },
+        },
+      });
+      return vgsBd;
+    }
+  } catch (error) {
+    return { error: error };
+  }
+};
 
 router.get("/", async (req, res) => {
   try {
     const { name } = req.query;
-    let vgsApi = await getVideogamesFromApi(name);
-    let vgsDb = await getVideogamesFromDb(name);
-    //const vgsBd = await Videogame.findAll();
-    vgsApi = [...vgsDb, ...vgsApi]; //agrego los vg de la bd
-
-      if (vgsApi.length) {
-       console.log(`cant total ${vgsApi.length}`)
-         /*console.log(`cant vgsApi ${vgsDb.length}`)
-        console.log(`cant vgsBD directo ${vgsBd.length}`)*/
-        return res.status(200).json({vgsApi });
-      } else {
-        return res.status(400).json({ Message: "No existen videogames con ese nombre" });
-      }
+   // console.log(` estoy en back con con 0`);
+   // console.log(typeof con);
+    let vgsApi = [];
+    let vgsDb = [];
+    let videogames = [];
+/*
+    if (con === "0") {
+      console.log(` otra vez estoy en back con con 0`);
+      //se conecta x primera vez a la api
+      vgsApi = await getVideogamesFromApi();
+      videogames = vgsApi;
     }
-   catch (error) {
-    res.status(400).json({ Error: error.message }); 
+
+    if(con === "1"){
+      console.log(` otra vez estoy en back con con =1`);
+      vgsDb = await getVideogamesFromDb();
+      videogames = vgsDb;
+    }
+
+*/
+    if(name){
+      vgsApi = await getVideogamesFromApi(name); 
+      vgsDb = await getVideogamesFromDb(name);
+
+      videogames = [...vgsApi, ...vgsDb]; //agrego los vg de la bd
+    }  
+    
+    else{
+      vgsApi = await getVideogamesFromApi();
+      vgsDb = await getVideogamesFromDb();
+       console.log('back - getfromdb() lo que cogi de la bd')
+        console.log(vgsDb)
+      videogames = [...vgsApi, ...vgsDb]; //agrego los vg de la bd 
+    }
+
+    //const vgsBd = await Videogame.findAll();
+    
+
+    if (videogames.length) {
+      console.log(`cant total ${videogames.length}`);
+      console.log(
+        `lo que hay en la rta del router.get("/", async (req, res) => { ${videogames}`
+      );
+      //console.log(videogames);
+      return res.status(200).json({ videogames });
+    } else {
+      return res
+        .status(400)
+        .json({ Message: "No existen videogames con ese nombre" });
+    }
+  } catch (error) {
+    res.status(400).json({ Error: error.message });
   }
 });
 
@@ -141,40 +194,95 @@ Debe crear un videojuego en la base de datos, y este debe estar relacionado con 
 router.post("/", async (req, res) => {
   try {
     const {
-      id,
       name,
       description,
       released,
       rating,
       background_image,
       platforms,
+      genres, 
+      origen
     } = req.body;
-    if (
-      !id |
+     if (
       !name |
       !description |
       !released |
       !rating |
       !background_image |
-      !platforms
+      !platforms|
+      !genres.length
     ) {
       return res.status(400).json({ Message: "Datos incompletos" });
     } else {
-      let newVideogamedd = await Videogame.create({
-        id,
-        name,
-        description,
-        released,
-        rating,
-        background_image,
-        platforms,
-      });
+    let newVideogameBd = await Videogame.create({
+      name,
+      description,
+      released,
+      rating,
+      background_image,
+      platforms,
+      origen
+    });
 
-      return res.status(201).json(newVideogamedd);
+    let genreIntance;
+    let arrayGenreInstances = [];
+    const long = genres.length;//genres es un [] que viene del front 
+
+    for (let i = 0; i < long; i++) {     
+      genreIntance = await Genre.findOne({ where: { name: genres[i] } });
+      arrayGenreInstances.push(genreIntance);
     }
+
+    //if (arrayGenreInstances.length) {
+    newVideogameBd.addGenres(arrayGenreInstances); //aqui le paso las instancias de genero al vg creado
+    console.log("imprimiendo la longitud de los generos del vg");
+    console.log(await newVideogameBd.countGenres());
+
+    /*   const result = await Videogame.findOne({ //este funciona con un solo genero
+          where: { name },
+          include: Genre  
+        });*/
+
+    const result = await Videogame.findOne({
+      //este funciona con un [] de generos
+      where: { name },
+      include: {
+        model: Genre,
+        through: {
+          attributes: [],
+        },
+      },
+    });
+    //AQUI TENGO QUE ARREGLAR LO DEL ARRAY DE GENRES
+
+    return res.status(201).json(result); //devuelve el objeto creado en la bd
+    // }
+    }  
   } catch (error) {
     return res.status(400).json({ Error: error.message });
   }
 });
+
+/*router.put('/transfer', async (req, res) => {
+  try{
+    const { idVg, codeGenre } = req.body;
+    const videogame = await Videogame.findByPk(idVg);
+    console.log(videogame.toJSON());
+    const respuesta = await videogame.addGenre(codeGenre);
+    res.status(201).json({respuesta});
+
+  } catch (error) {
+    return res.status(400).json({ Error: error.message });
+  }
+ 
+});*/
+
+/*server.put('/multipletransfer', async (req, res) => {
+  const { override } = req.query;
+  const { idPlayer, codeTeams } = req.body;
+  const player = await Player.findByPk(idPlayer);
+  if(override) return res.json(await player.setTeams(codeTeams))
+  res.json(await player.addTeams(codeTeams));
+});*/
 
 module.exports = router;
