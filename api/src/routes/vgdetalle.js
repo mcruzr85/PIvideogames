@@ -12,20 +12,31 @@ const router = Router();
 
 const isNumeric = n => !!Number(n);
 
-router.get("/:idVideogame", async(req,res)=>{
+router.get("/:id", async(req,res)=>{//idVideogame
    try{
-    const { idVideogame } = req.params;
+    const { id } = req.params;
     const { creado } = req.query;
     console.log('creado es');
     console.log(creado);
     
-    if(idVideogame){
-        if(isNumeric(idVideogame)){
-         let apiData 
-         apiData = await axios(`https://api.rawg.io/api/games/${idVideogame}?key=928a106257314462a3a43bf37033df35`)
-             
-             const videogame = apiData.data;
-             let copyVideogame = {};
+    if(id){
+      console.log('llego el id de typo');
+     // console.log(typeof idVideogame);
+
+        if(isNumeric(id)){
+         console.log('isNumeric?')
+       //  console.log(isNumeric(idVideogame));
+         let apiData
+         let copyVideogame = {};
+
+         console.log('creado es ');
+         console.log(typeof creado);
+         if(creado === "false"){
+            console.log('entre a axios con creado igual a ');
+            console.log(creado);
+            apiData = await axios(`https://api.rawg.io/api/games/${id}?key=928a106257314462a3a43bf37033df35`)
+            const videogame = apiData.data;  
+               
              //hago esto para tomar solo las propiedades que me interesan de la data
               copyVideogame.id = videogame.id;
               copyVideogame.name = videogame.name;
@@ -37,14 +48,28 @@ router.get("/:idVideogame", async(req,res)=>{
               copyVideogame.background_image = videogame.background_image;              
               copyVideogame.platforms = videogame.platforms.map(e => e.platform.name);
               copyVideogame.description = videogame.description;
+         }
+         else{
+ //const bdData =  await Videogame.findByPk(idVideogame);  FALTA 
+ copyVideogame =  await Videogame.findByPk(id); 
+           /* copyVideogame = await Videogame.findOne({
+               //este funciona con un [] de generos
+               where: { id },
+               include: {
+                 model: Genre,
+                 through: {
+                   attributes: [],
+                 },
+               },
+             }); */
+             console.log('data en el back cuando es creado');    
+             console.log(copyVideogame);       
+         }       
 
-    
-           //const bdData =  await Videogame.findByPk(idVideogame);  FALTA 
-
-            return res.status(200).json({copyVideogame});           
+          return res.status(200).json({copyVideogame});           
         }
         else{
-           return res.status(400).json({'Mensage': ` ${idVideogame} no es un Id valido`});
+           return res.status(400).json({'Mensage': ` ${id} no es un Id valido`});
         }
     }
    }catch(error){

@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import * as actions from '../redux/actions';
-import { DetailContainer, CardDetail} from "../styled";
+import { DetailContainer, CardDetail, FotoForm} from "../styled";
 
 
 
@@ -177,7 +177,7 @@ const Form = () => {
             value={videogame.platforms}
             
             onChange={handleVideogame}
-          ><option value="all">-Platforms-</option>
+          ><option value="" disabled={true}>-Platforms-</option>
             <option value="playstation5">Playstation 5</option>
             <option value="playstation4">Playstation 4</option>
             <option value="playstation3">Playstation 3</option>
@@ -194,8 +194,8 @@ const Form = () => {
           <label>
             Genres:
           <select name="genres" multiple={true} id="genres" onChange={(e)=>addGenre(e)}>
-            <option value="all">-Genres-</option>
-              {genres.genres && genres.genres.map((g) => {
+            <option value="all" disabled={true}>-Genres-</option>
+              {genres && genres.map((g) => {
               return <option key={g.name} value={g.name}>{g.name}</option>;
                  })}
           </select>
@@ -234,9 +234,16 @@ const Form = () => {
           <button>Create</button>
         </div>
       </form>
+      
+    </div>
+    <div>
+    <FotoForm src={videogame.background_image} alt={videogame.name} />
+    <p>Preview</p>
     </div>
 
       </CardDetail>
+
+     
       </DetailContainer>
     </>
     

@@ -26,14 +26,27 @@ const getGenresFromDb = async () => {
   router.get("/", async (req,res)=>{ 
     try{   
      const genres = await getGenresFromDb();
-     console.log('desde back getgenresfromdb')
-     console.log(genres)
-      return res.status(200).send({ genres });
+   //  console.log('desde back getgenresfromdb')
+    // console.log(genres)
+      return res.status(200).json({genres});
     }catch(error){
         return res.status(400).json({"Error": error.message});
     }    
 });
 
-
+/**
+ *asi estaba
+  router.get("/", async (req,res)=>{ 
+    try{   
+     const genres = await getGenresFromDb();
+   //  console.log('desde back getgenresfromdb')
+    // console.log(genres)
+      return res.status(200).send({ genres });
+    }catch(error){
+        return res.status(400).json({"Error": error.message});
+    }    
+});
+ * 
+ */
 
 module.exports = router;

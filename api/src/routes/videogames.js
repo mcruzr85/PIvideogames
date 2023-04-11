@@ -20,6 +20,8 @@ Debe buscar tanto los de la API como los de la base de datos
 
 //https://api.rawg.io/api/games?search=${name}&key=928a106257314462a3a43bf37033df35
  */
+
+
 const getVideogamesFromApi = async (name) => {
   try {
     let apiData = [];
@@ -92,10 +94,10 @@ const getVideogamesFromApi = async (name) => {
 };
 
 const getVideogamesFromDb = async (name) => {
-  //ojo me falta buscar  genero de cada vg
+  
   try {
     if (!name) {
-      const vgsBd = await Videogame.findAll({
+      let vgsBd = await Videogame.findAll({
         //este funciona con un [] de generos
         //where: { name },
         include: {
@@ -105,14 +107,12 @@ const getVideogamesFromDb = async (name) => {
           },
         },
       });
+     // let vgs = addArrayGenres(vgsBd);
+      //return vgs;
       return vgsBd;
 
     } else {
-     /* const { count, rows } = await Videogame.findAndCountAll({
-        where: { name: { [Op.iLike]: `%${name}%` } },
-      });
-      return rows;*/
-      const vgsBd = await Videogame.findAll({
+      let vgsBd = await Videogame.findAll({
         where: { name: { [Op.iLike]: `%${name}%` } },
         include: {
           model: Genre,
@@ -121,6 +121,8 @@ const getVideogamesFromDb = async (name) => {
           },
         },
       });
+     // let vgs = addArrayGenres(vgsBd);
+      //return vgs;
       return vgsBd;
     }
   } catch (error) {
@@ -130,9 +132,14 @@ const getVideogamesFromDb = async (name) => {
 
 router.get("/", async (req, res) => {
   try {
-    const { name } = req.query;
-   // console.log(` estoy en back con con 0`);
-   // console.log(typeof con);
+    const { con,  name } = req.query;
+
+    console.log(` estoy en back con es `);
+   console.log(con);
+
+   console.log(` estoy en back name es `);
+   console.log(name);
+
     let vgsApi = [];
     let vgsDb = [];
     let videogames = [];
@@ -158,12 +165,20 @@ router.get("/", async (req, res) => {
       videogames = [...vgsApi, ...vgsDb]; //agrego los vg de la bd
     }  
     
-    else{
+    else if(con === "2"){
       vgsApi = await getVideogamesFromApi();
       vgsDb = await getVideogamesFromDb();
-       console.log('back - getfromdb() lo que cogi de la bd')
+       console.log('back - get from api y bd con = 2, imprimo lo que trajo de la bd')
         console.log(vgsDb)
       videogames = [...vgsApi, ...vgsDb]; //agrego los vg de la bd 
+    }
+
+    else if(con === "1"){
+      
+      vgsDb = await getVideogamesFromDb();
+       console.log('back - get solo from  bd con = 1, imprimo lo que trajo de la bd')
+        console.log(vgsDb)
+      videogames = [ ...vgsDb]; //agrego los vg de la bd 
     }
 
     //const vgsBd = await Videogame.findAll();
@@ -243,7 +258,7 @@ router.post("/", async (req, res) => {
           include: Genre  
         });*/
 
-    const result = await Videogame.findOne({
+    const videogame = await Videogame.findOne({
       //este funciona con un [] de generos
       where: { name },
       include: {
@@ -253,9 +268,9 @@ router.post("/", async (req, res) => {
         },
       },
     });
-    //AQUI TENGO QUE ARREGLAR LO DEL ARRAY DE GENRES
+   
 
-    return res.status(201).json(result); //devuelve el objeto creado en la bd
+    return res.status(201).json({videogame}); //devuelve el objeto creado en la bd
     // }
     }  
   } catch (error) {

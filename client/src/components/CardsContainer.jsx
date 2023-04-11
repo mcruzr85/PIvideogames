@@ -15,67 +15,50 @@ const CardsContainer = () => {
   let currentVideogames = [];
   const [isLoading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  // eslint-disable-next-line no-unused-vars
   const [postPerPage, setPostPerPage] = useState(15);
 
  let videogames = useSelector(state => state.videogames)
  const dispatch= useDispatch()
  
-
-
   useEffect(() => {
     let con = 2; //se conecta a la api y a la bd
     if (videogames.length === 0) {
       console.log(`entre al efect vg.len es  ${videogames.length}`);
       const serverConection = async () => {
-        setLoading(true);
-         //con = 0 //solo se conecta a la api
-        //const obj = {con: 0, name: null}
-       // await getAllVideogames();
-       await  dispatch(actions.getAllVideogames(con)) ;
-        // console.log(`el valor de con es ${con}`)
-        setLoading(false);
+      setLoading(true);       
+      await  dispatch(actions.getAllVideogames(con, null)) ;       
+      setLoading(false);
       };
       serverConection();
     }
+  
+  }, [dispatch, videogames.length]); 
 
-     if(videogames.length !== 0 &&  videogames.length !== 100 ){
-      con = 1; //solo se conecta a la bd
-      const serverConection = async () => { 
-        setLoading(true);
-        //const obj = {con: 1, name: null} //se conecta solo a la bd o a la bd
-        await  dispatch(actions.getAllVideogames(con)) ;
-        setLoading(false);
-      };
-      serverConection();  
-    }    
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); 
+    //get Current videogames
+  const indexOfLastVideogame = currentPage * postPerPage;
+  const indexOfFirstVideogame = indexOfLastVideogame - postPerPage;
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
-    console.log(
-      `colocando e imprimiendo el valor de current page ${currentPage}`
-    );
+    console.log(`colocando e imprimiendo el valor de current page ${currentPage}`);
   };
 
-  //get Current videogames
-  const indexOfLastVideogame = currentPage * postPerPage;
-  const indexOfFirstVideogame = indexOfLastVideogame - postPerPage;
+
 
   console.log(
     `imprimiendo desde el componente cardcontainer lo que tiene videogame al cargar =>`
   );
   console.log(videogames);
-  console.log(videogames.videogames);
+  
 
-  if (videogames.videogames) {
-    currentVideogames = videogames.videogames.slice(
+  if (videogames.length) {
+    currentVideogames = videogames.slice(
       indexOfFirstVideogame,
       indexOfLastVideogame
     );
-    console.log(
-      "imprimiendo desde el componente cardcontainerlo que tiene currentVideogames"
-    );
+    
+    console.log("imprimiendo desde el componente cardcontainerlo que tiene currentVideogames" );
     console.log(currentVideogames);
   }
 
@@ -85,10 +68,13 @@ const CardsContainer = () => {
         <Spinner />
       ) : (
         <div>
+          <div>
+
+          
 
         <Filter />
         <MainContainer>
-          {videogames.videogames &&
+          {currentVideogames &&
             currentVideogames.map((e) => (
               <Card
                 key={e.id}
@@ -103,16 +89,19 @@ const CardsContainer = () => {
             ))}
         </MainContainer>
         </div>
-      )}
-      <div style={{ margin: "0 auto" }}>
-        {videogames.videogames && (
+
+        <div style={{ margin: "0 auto" }}>
+        {videogames.length && (
           <Pagination
             postPerPage={postPerPage}
-            totalPosts={videogames.videogames.length}
+            totalPosts={videogames.length}
             paginate={paginate}
           />
         )}
       </div>
+
+        </div>)}
+      
     </>
   );
 };

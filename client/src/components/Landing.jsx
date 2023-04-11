@@ -14,7 +14,7 @@ const Landing = () => {
           <p style={{color:"white"}}>I'm a GAMER...so</p>
         
         </LandingDiv>
-        <div class="text-box">
+        <div className="text-box">
             <a href="/home" className="btn btn-white btn-animate">I play</a>
           </div>   
      

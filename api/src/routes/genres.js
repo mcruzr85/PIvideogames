@@ -21,8 +21,8 @@ const getGenresFromApi = async () => {
        }
    })   
       await Genre.bulkCreate(arrayGenres);//allows you to insert multiple records to your database table with a single function call
-      console.log('desde back getgenresfromapi')
-      console.log(arrayGenres) 
+      //console.log('desde back getgenresfromapi')
+     // console.log(arrayGenres) 
       return arrayGenres;
   } catch (error) {
       return {error: error.message}

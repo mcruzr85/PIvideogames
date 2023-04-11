@@ -8,7 +8,7 @@ import Spinner from "./Spinner";
 import { DetailContainer, CardDetail, FotoDetail, ScrollDiv } from "../styled";
 
 function isFromDatabase(id, array) {
-  const vgToDetail = array.filter(e => e.id === id);  
+  const vgToDetail = array.filter(e => e.id == id);  
   console.log(vgToDetail);         
   const isDB = vgToDetail.filter(e => e.origen === "db");
   if (isDB.length > 0) {return true;}
@@ -19,7 +19,7 @@ function isFromDatabase(id, array) {
 
 const Details = () => {
 
-  let details = {};
+  //let details = {}; <h3>{`Genres: ${details.genres}`}</h3>
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -30,9 +30,9 @@ const Details = () => {
     const connection = async () => {
       let creado = false;
       setLoading(true);
-      const vgDb = await isFromDatabase(id, videogames.videogames);
+      const vgDb = await isFromDatabase(id, videogames);
       console.log(`hay creado con ese id? ${id}`);
-console.log(vgDb);
+      console.log(vgDb);
       if(vgDb) {
         setVgCreated(true);
         creado = true;       
@@ -42,17 +42,21 @@ console.log(vgDb);
     };
     connection();
     return () => dispatch(actions.resetDetails());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+ 
+  }, [dispatch, id, videogames]);
 
   const [loading, setLoading] = useState(false);
   const [vgCreated, setVgCreated] = useState(false); //lo inicializo como que es de la api
 
-  details = useSelector((state) => state.videogameDetails); 
-  const descriptionHtml = `${details.description}`; //para el scroll del description
+  const details = useSelector((state) => state.videogameDetails); 
+  var descriptionHtml = '';
+  if(!vgCreated){
+    descriptionHtml = `${details.description}`;
+  }
+   //para el scroll del description
 
   function handleClick() {
-    navigate("/home");
+    navigate(-1)
   }
 
   return (
@@ -65,12 +69,16 @@ console.log(vgDb);
             <div>
               <h3>{`Id: ${details.id}`}</h3>
               <h2> {details.name}</h2>
-              <h3>{`Genres: ${details.genres}`}</h3>
+              
               <h3>{`Rating: ${details.rating}`}</h3>
               <h3>{`Released: ${details.released}`}</h3>
               <h3>{`Platforms: ${details.platforms}`}</h3>
               <h3>{`Web site: ${details.website}`}</h3>
-              <ScrollDiv>{parse(descriptionHtml)}</ScrollDiv>
+              
+              {vgCreated ? 
+              (<ScrollDiv>{details.description}</ScrollDiv>) : 
+              (<ScrollDiv>{parse(descriptionHtml)}</ScrollDiv>)}
+              
             </div>
 
             <div>
