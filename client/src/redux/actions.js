@@ -8,6 +8,7 @@ export const FILTER_GENRE = "FILTER_GENRE";
 export const FILTER_ORIGEN = "FILTER_ORIGEN";
 export const ORDER = "ORDER";
 export const RESET_SEARCH = "RESET_SEARCH";
+export const GET_VIDEOGAMES_NAME = "GET_VIDEOGAMES_NAME";
 
 
 function addArrayGenres(array) { 
@@ -72,6 +73,7 @@ export const addVideogame = (obj) => async (dispatch) => {
     //alert(error.message);
   }
 };
+
 export const getAllVideogames = (con, name) => async (dispatch) => {
   try {
     console.log(`desde la action getAllVideogames llego con name valor ${name}` );
@@ -85,29 +87,23 @@ export const getAllVideogames = (con, name) => async (dispatch) => {
     }
 
     const data = await response.json();
-    console.log(`desde la action getAllVideogames resultado de  data.videogames es`);
-  //  console.log(data.videogames);
+  
     let dataGenres = addArrayGenres(data.videogames);
 
-    console.log(`info en dataGenres`);
-    console.log(dataGenres);
-
-    //console.log(`imprimo data.videogames`);
-   // console.log(data.videogame.genres);
     if(data.Message){
         alert("No results")
     }
 
-    if (name || con === 2) {
+    if(con === 2) { //estoy buscando sin name
       return dispatch({
         type: GET_VIDEOGAMES,
         payload: dataGenres,
       });
     }
 
-    if (con === 1) {
+    if(name) {
       return dispatch({
-        type: UPDATE_VIDEOGAMES,
+        type: GET_VIDEOGAMES_NAME,
         payload: dataGenres,
       });
     }

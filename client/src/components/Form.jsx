@@ -70,18 +70,14 @@ const Form = () => {
       return myError;
     }
   
-    function handleVideogame(e){  
-        
-        setVideogame({ ...videogame,  [e.target.name] : e.target.value }); 
-        setError( validate({...videogame,  [e.target.name] : e.target.value }))
-        console.log('imprimo state videogame');
-        console.log(videogame)
-        console.log('imprimo state error');
-        console.log(error);        
-    };
+   
+  const handleVideogame = (e) =>{           
+      setVideogame({ ...videogame,  [e.target.name] : e.target.value }); 
+      setError( validate({...videogame,  [e.target.name] : e.target.value }))         
   
+  }
 
-  function addGenre(e) {
+  const  addGenre= (e)=> {
     if(!videogame.genres.includes(e.target.value)){
       setVideogame({...videogame, genres: [...videogame.genres, e.target.value]} )
       //setError( validate({...videogame,  [e.target.name] : e.target.value }))
@@ -92,8 +88,8 @@ const Form = () => {
   async function handleSubmit(e) {  
     e.preventDefault();
 
-    console.log(`estoy en Form insertando el vg`);
-    console.log(videogame);
+   // console.log(`estoy en Form insertando el vg`);
+   // console.log(videogame);
 
     const hayErrors = validate({ ...videogame, [e.target.name]: e.target.value })//es un objeto
     const arrayError = Object.values(hayErrors)//array con los valores del objeto

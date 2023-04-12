@@ -1,14 +1,15 @@
 import {
-  GET_VIDEOGAMES, UPDATE_VIDEOGAMES,
+  GET_VIDEOGAMES, 
   ADD_VIDEOGAME,
   GET_DETAILS,
   RESET_DETAILS,
   GET_GENRES,
   FILTER_GENRE, FILTER_ORIGEN,
   ORDER,
-  RESET_SEARCH,
+  RESET_SEARCH, 
+  GET_VIDEOGAMES_NAME,
 } from "./actions";
-//,GET_UPDATEDVIDEOGAMES
+
 const initialState = {
   videogames: [],
   videogamesCopy: [],
@@ -18,27 +19,25 @@ const initialState = {
 
 export default function reducer(state = initialState, { type, payload }) {
   switch (type) {
-    case ADD_VIDEOGAME:
-      console.log(' add vg reducer=> videogamesCopy');
-      console.log(state.videogamesCopy);
-      console.log(state.videogamesCopy.length);
-      return {
-        
+
+    case ADD_VIDEOGAME:    
+      return {        
         ...state,
         videogames: [...state.videogames, payload], //agrego el vg creado a vgs y vgsDb                    
         videogamesCopy: [...state.videogamesCopy, payload],
       };      
 
-    case GET_VIDEOGAMES:// OKCP  sobreescribo lo que hay 
-     // console.log(`se ejecuto en reducer getVideogames ${payload} y muestro el payload`);
-      //console.log(payload);
-      console.log(' get vg reducer=> videogamesCopy');
-      console.log(state.videogamesCopy);
-      console.log(state.videogamesCopy.length);
+    case GET_VIDEOGAMES://   sobreescribo lo que hay    en videogame y en la copia
       return {
         ...state, 
         videogames: payload,
         videogamesCopy: payload,
+      }; 
+
+      case GET_VIDEOGAMES_NAME://    
+      return {
+        ...state, 
+        videogames: payload,        
       }; 
 
      

@@ -68,9 +68,16 @@ const CardsContainer = () => {
         <Spinner />
       ) : (
         <div>
-          <div>
-
-          
+          <div style={{ margin: "0 auto" }}>
+            {videogames.length && (
+             <Pagination
+              postPerPage={postPerPage}
+              totalPosts={videogames.length}
+              paginate={paginate}
+             />
+             )}
+          </div>
+          <div>       
 
         <Filter />
         <MainContainer>
@@ -88,17 +95,7 @@ const CardsContainer = () => {
               />
             ))}
         </MainContainer>
-        </div>
-
-        <div style={{ margin: "0 auto" }}>
-        {videogames.length && (
-          <Pagination
-            postPerPage={postPerPage}
-            totalPosts={videogames.length}
-            paginate={paginate}
-          />
-        )}
-      </div>
+        </div>       
 
         </div>)}
       
