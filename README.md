@@ -6,8 +6,8 @@
 
 -  Este proyecto es una Single Page Application creada utlizando las tecnologías: **React**, **Redux**, **Node**, **Express** y **Sequelize**. Para aplicar estilos a la SPA hemos usado **CSS** y **Styled Components**.
 
--  La aplicación web se conecta a la API [**rawg**](https://rawg.io/apidocs) y es posible 
-
+-  La aplicación web se conecta a la API [**rawg**](https://rawg.io/apidocs), entre sus funcionalidades tenemos: 
+-  Mostrar 100 videojuegos. 
 -  Buscar videojuegos.
 -  Visualizar la información de los videojuegos.
 -  Filtrarlos.
@@ -20,45 +20,18 @@
 
 ## **📁 INSTRUCCIONES**
 
-1. Deberás forkear este repositorio para tener una copia del mismo en tu cuenta personal de GitHub.
+ Pasos para poder levantar la App
+
+1- Tu primer paso será ejecutar el comando npm install para instalar todas las dependencias, tando en la carpeta /api como en la /client
+2- En una terminal tipear para que se levante el servidor local npm start en el back y luego en el front.
+
+Listo! Disfruta de esta app hecha con mucho amor 🌹💖✨💛🚀
 
 ---
 
 <br />
 
 
-### **🖱 BACK-END**
-
-Para esta parte deberás construir un servidor utilizando **NodeJS** y **Express**. Tendrás que conectarlo con tu base de datos mediante **Sequelize**.
-
-
-
-### **🖱 FRONT-END**
-
-Se debe desarrollar una aplicación utilizando **React** y **Redux** que contenga las siguientes vistas:
-
-**📍 LANDING PAGE |** deberás crear una página de inicio o bienvenida con:
-
--  Alguna imagen de fondo representativa al proyecto.
--  Botón para ingresar a la **`home page`**.
-
-<br />
-
-**📍 HOME PAGE |** la página principal de tu SPA debe contener:
-
--  SearchBar: un input de búsqueda para encontrar videojuegos por nombre.
--  Sector en el que se vea un listado de cards con los videojuegos. Al iniciar deberá cargar los primeros resultados obtenidos desde la ruta **`GET /videogames`** y deberá mostrar su:
-   -  Imagen.
-   -  Nombre.
-   -  Géneros.
--  Cuando se le hace click a una Card deberá redirigir al detalle de ese videojuego específico.
--  Botones/Opciones para **filtrar** por género, y por si su origen es de la API o de la base de datos (creados por nosotros desde el formulario).
--  Botones/Opciones para **ordenar** tanto ascendentemente como descendentemente los videojuegos por orden alfabético y por rating.
--  Paginado: el listado de videojuegos se hará por partes. Tu SPA debe contar con un paginado que muestre un total de 15 videojuegos por página.
-
-
-
-<br />
 
 
 
