@@ -4,9 +4,9 @@
 
 ## **📌 OBJETIVOS**
 
--  Este proyecto es una Single Page Application creada utlizando las tecnologías: **React**, **Redux**, **Node**, **Express** y **Sequelize**. Para aplicar estilos a la SPA hemos usado **CSS** y **Styled Components**.
+Este proyecto es una Single Page Application creada utilizando las tecnologías: **React**, **Redux**, **Node**, **Express** y **Sequelize**. Para aplicar estilos a la SPA hemos usado **CSS** y **Styled Components**.
 
--  La aplicación web se conecta a la API [**rawg**](https://rawg.io/apidocs), entre sus funcionalidades tenemos: 
+La aplicación web se conecta a la API [**rawg**](https://rawg.io/apidocs), entre sus funcionalidades tenemos: 
 -  Mostrar 100 videojuegos. 
 -  Buscar videojuegos.
 -  Visualizar la información de los videojuegos.
