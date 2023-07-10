@@ -31,6 +31,10 @@ Listo! Disfruta de esta app hecha con mucho amor 🌹💖✨💛🚀
 
 <br />
 
+<div align="center">
+<img src="./videogame.png" alt="saludos" />
+</div>
+
 <!--
 ![HenryLogo](https://d31uz8lwfmyn8g.cloudfront.net/Assets/logo-henry-white-lg.png)
 
@@ -220,4 +224,3 @@ Ten en cuenta que en esta instancia no es obligatorio el desarrollo de testing p
 <div align="center">
 <img src="./videogame.png" alt="" />
 </div>
-c4
