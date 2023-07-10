@@ -16,7 +16,7 @@ export const Global = createGlobalStyle`
       
   body {  
       margin: 0 auto;  
-      background: #455062;            
+      background: #001d3d;            
       min-height: 100vh;       
       font-family: 'Chilanka', cursive;    
     }
@@ -46,8 +46,5 @@ export const LandingGlobalStyle = createGlobalStyle`
     } 
 
 `;
-
-
-
 
 export default Global;

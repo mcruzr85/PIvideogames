@@ -7,26 +7,25 @@ import {
   TextoName,
   DivName,
   TextoCard,
-  DetailBoton,
+  CardBoton,
 } from "../styled";
 
 const Card = ({ id, name, image, genres, rating, origen }) => {
-  
   return (
     <>
       <Relative>
         <Foto src={image} />
 
-        <Info>          
+        <Info>
           <DivName>
             <TextoName>{name}</TextoName>
           </DivName>
-          <TextoCard>{`Rating: ${rating}`}</TextoCard> 
-             
-         <TextoCard>{genres}</TextoCard>
-        
+          <TextoCard>{`Rating: ${rating}`}</TextoCard>
+
+          <TextoCard>{genres}</TextoCard>
+
           <Link to={`/details/${id}`}>
-            <DetailBoton>
+            <CardBoton>
               <svg
                 viewBox="0 0 24 24"
                 fill="#231B4A"
@@ -37,7 +36,7 @@ const Card = ({ id, name, image, genres, rating, origen }) => {
                 <path d="M6 7h12v2H6zm0 4h12v2H6zm0 4h6v2H6z" />
               </svg>
               Details
-            </DetailBoton>
+            </CardBoton>
           </Link>
         </Info>
       </Relative>
@@ -47,7 +46,6 @@ const Card = ({ id, name, image, genres, rating, origen }) => {
 };
 
 export default Card;
-
 
 /**import React from "react";
 import { Link } from "react-router-dom";

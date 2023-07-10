@@ -32,7 +32,7 @@ Listo! Disfruta de esta app hecha con mucho amor 🌹💖✨💛🚀
 <br />
 
 <div align="center">
-<img src="./hello.png" alt="Rick and Morty dancing" />
+<img src="./assets/hello.png" alt="Rick and Morty dancing" />
 </div>
 
 <!--
