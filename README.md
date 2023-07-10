@@ -6,23 +6,23 @@
 
 Este proyecto es una Single Page Application creada utilizando las tecnologías: **React**, **Redux**, **Node**, **Express** y **Sequelize**. Para aplicar estilos a la SPA hemos usado **CSS** y **Styled Components**.
 
-La aplicación web se conecta a la API [**rawg**](https://rawg.io/apidocs), entre sus funcionalidades tenemos: 
--  Mostrar 100 videojuegos. 
--  Buscar videojuegos.
--  Visualizar la información de los videojuegos.
--  Filtrarlos.
--  Ordenarlos.
--  Crear nuevos videojuegos.
+La aplicación web se conecta a la API [**rawg**](https://rawg.io/apidocs), entre sus funcionalidades tenemos:
 
-
+- Mostrar 100 videojuegos.
+- Buscar videojuegos.
+- Visualizar la información de los videojuegos.
+- Filtrarlos.
+- Ordenarlos.
+- Crear nuevos videojuegos.
 
 <br />
 
 ## **📁 INSTRUCCIONES**
 
- Pasos para poder levantar la App
+Pasos para poder levantar la App
 
 1- Tu primer paso será ejecutar el comando npm install para instalar todas las dependencias, tando en la carpeta /api como en la /client
+<br />
 2- En una terminal tipear para que se levante el servidor local npm start en el back y luego en el front.
 
 Listo! Disfruta de esta app hecha con mucho amor 🌹💖✨💛🚀
@@ -31,9 +31,9 @@ Listo! Disfruta de esta app hecha con mucho amor 🌹💖✨💛🚀
 
 <br />
 
-
-
-
+<div align="center">
+<img src="./wall.jpg" alt="" />
+</div>
 
 <!--
 ![HenryLogo](https://d31uz8lwfmyn8g.cloudfront.net/Assets/logo-henry-white-lg.png)
@@ -220,7 +220,3 @@ Ten en cuenta que en esta instancia no es obligatorio el desarrollo de testing p
 ---
 
 <br />
-
-<div align="center">
-<img src="./videogame.png" alt="" />
-</div>
