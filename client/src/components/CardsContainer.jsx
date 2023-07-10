@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import * as actions from "../redux/actions";
 import { connect, useDispatch, useSelector } from "react-redux";
-import { MainContainer } from "../styled";
+import { MainContainer , Main} from "../styled";
 import Card from "./Card";
 import Spinner from "./Spinner";
 import Pagination from "./Pagination";
@@ -80,6 +80,7 @@ const CardsContainer = () => {
           <div>       
 
         <Filter />
+        
         <MainContainer>
           {currentVideogames &&
             currentVideogames.map((e) => (
@@ -95,6 +96,7 @@ const CardsContainer = () => {
               />
             ))}
         </MainContainer>
+        
         </div>       
 
         </div>)}

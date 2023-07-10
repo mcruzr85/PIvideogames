@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 //import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../redux/actions";
+import {FilterDiv} from '../styled';
 
 async function getGenresOk() {
   try {
@@ -77,7 +78,7 @@ function activarOrderSelect(value){
 
   return (
     <>
-      <div>
+      <FilterDiv>
         <select name="filterOrigen" onChange={handleFilters}>
           <option  value="title">
             -Created-
@@ -114,7 +115,7 @@ function activarOrderSelect(value){
           <option value="des">Des</option>
         </select>) : null}
         
-      </div>
+      </FilterDiv>
     </>
   );
 };

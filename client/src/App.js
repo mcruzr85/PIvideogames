@@ -8,7 +8,9 @@ import Details from './components/Details';
 import Form from './components/Form';
 import Nav from "./components/Nav";
 import Landing from './components/Landing';
-import { GlobalStyle } from "./styled";
+//import { GlobalStyle } from "./styled";
+import {Global} from './styles/global';
+
 
 function App() {
 
@@ -16,7 +18,7 @@ function App() {
  
   return (
     <>
-      <GlobalStyle/>
+      <Global/>
      
         {(location.pathname !== '/') && <Nav/> }
 

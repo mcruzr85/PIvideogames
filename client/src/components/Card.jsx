@@ -21,9 +21,10 @@ const Card = ({ id, name, image, genres, rating, origen }) => {
           <DivName>
             <TextoName>{name}</TextoName>
           </DivName>
-          <TextoCard>{`Rating: ${rating}`}</TextoCard>         
+          <TextoCard>{`Rating: ${rating}`}</TextoCard> 
+             
          <TextoCard>{genres}</TextoCard>
-         
+        
           <Link to={`/details/${id}`}>
             <DetailBoton>
               <svg

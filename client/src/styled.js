@@ -1,20 +1,7 @@
-import styled, { createGlobalStyle } from 'styled-components'; 
+import styled from 'styled-components'; 
 
-import background from "./assets/bg2.jpg"
+//import background from "./assets/bg2.jpg"
 
-export const LandingGlobalStyle = createGlobalStyle`
-  body{
-    margin: 0 auto;    
-    font-size: 1.6rem; 
-    background-image: url(${background});
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    min-height: 100vh; 
-    display:flex;
-    flex-direction:column;
-  }
-`;
 
 
 /**
@@ -24,27 +11,44 @@ const Content = styled.div`
     background-image: url(${props => props.img});
 `;
 <Content img={ImagePath} />
- */
+//width: min(80%, 800px);  
 
-export const GlobalStyle = createGlobalStyle`
-  body{
-    margin: 0 auto;        
-    background: #455062;
-    min-height: 100vh; 
-  }
-`;
+ */
+//cards container
+
+
+export const MainContainer = styled.div` 
+width: min(90%, 120rem);
+margin: 2rem auto 0 auto;
+display:flex;
+flex-direction: column;
+
+
+@media (min-width: 550px){
+  display: grid;
+  grid-template-columns: repeat(2, 251px 20px);
+  place-content: center;
+  margin-right: 20px;
+  column-gap: .5rem;
+}
+
+@media (min-width: 1204px){
+  width: min(90%, 120rem);
+  grid-template-columns:  repeat(3, 251px 20px); 
+}
+`; 
+
 
 //component Card
 export const Relative = styled.div`
   background-color: #3E4755;
   width: 250px;
   height: 150px; 
-  margin:1rem 2rem;
+  margin: 1rem auto;
   border-radius:6px;
   box-shadow: 0 4px 8px 0 rgba(192, 192, 192, 0.4), 0 6px 20px 0 rgba(192, 192, 192, 0.19);
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: .2rem;  
+  grid-template-columns: 1fr 1fr;    
   
   &:hover{
     cursor:pointer;
@@ -64,12 +68,12 @@ export const Info = styled.div`
   position:relative;     
 `;
 export const TextoName = styled.p`
-font-weight:700;
+ font-weight:700;
  color: white;
- font-size: 1.2rem;
+ font-size: 15px;
  line-height: 90%;
  margin:0;
- margin-top:1rem;
+ margin-top:.7rem;
 
 `;// z-index: 0;
 
@@ -83,7 +87,7 @@ export const DivName = styled.div`
 export const TextoCard = styled.p`
 font-weight:500;
  color: white;
- font-size: 1.1rem;
+ font-size: 13px;
  line-height: 90%;
  margin:0;
  margin-top:1rem;
@@ -97,8 +101,8 @@ border: 1.5px solid #D5E1E6;
 border-radius: 5px;
 transition: all .3s ease;
 position:absolute;
-top:12rem;
-left:1rem;
+top:7.2rem;
+left:.4rem;
 width:80px;
 height:19px;
 
@@ -110,7 +114,7 @@ height:19px;
 //componente de Landing
 
 export const LandingBoton = styled.button`
-border-radius: 100px; 
+  border-radius: 100px; 
   min-width: 130px;
   height: 40px;
   color: #fff;
@@ -127,12 +131,74 @@ border-radius: 100px;
   border: 2px solid #57cc99;
   background: #57cc99;
 `;
-export const LandingDiv = styled.div`    
+export const LandingContainer = styled.div`  
+    width: min(80%, 120rem);  
+    margin: 1rem auto;
+    padding-top: 2rem;
     display:flex;
-    flex-direction:column;
-    margin-top:15rem;
-    margin-left:75rem;  
+    flex-direction: column;
+    
+    @media (min-width: 768px) {    
+      margin: 1rem auto;
+    }
+
+    @media (min-width: 1024px) {
+      display: grid;
+      grid-template-columns: 2fr 1fr; 
+    }    
+
 `;
+export const LandingImgDiv = styled.div`  
+margin-top:3rem;  
+
+@media (min-width: 768px) {
+  width: min(80%, 100rem); 
+  margin: 0 auto;
+}
+
+@media (min-width: 1024px) {
+  width: min(80%, 120rem); 
+  padding-top: 2rem;
+}
+`;
+
+export const LandingLettersDiv = styled.div`  
+@media (min-width: 1024px) {
+  grid-column-start: 1;
+  grid-column-end: 3; 
+}
+`;
+
+export const LandingButton = styled.a`  
+top: 70%;
+left: 50%;
+transform: translateX(-50%);
+
+@media (min-width: 1024px) {
+  top: 50%;
+  left: 70%;
+}
+`;
+ 
+export const LandingP = styled.p`    
+   color:white; 
+   font-size: 20px;  
+   text-align:center;
+   @media (min-width: 768px) {
+    font-size: 30px;
+   }
+ 
+`;
+//FILTER
+export const FilterDiv = styled.div`
+
+display: block;
+
+@media (min-width: 768px){
+  display:inline-block;
+}
+`;
+
 
 
 //Componente de Detalles de la card seleccionada  #9CCFF0;
@@ -165,6 +231,14 @@ export const CardDetail = styled.div`
   margin: 1rem auto; 
   padding:2rem;
 `; // width: min(80%, 800px);
+//FORM
+export const FotoForm = styled.img`
+    width: 210px;
+    height: 285px;
+    margin: auto 1rem;   
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  `;    
 
 export const FotoDetail = styled.img`
     width: 100%;
@@ -194,16 +268,6 @@ align-items: center;
   justify-content: space-around;  
   gap: 2rem;  
 `;
-//cards container
-export const MainContainer = styled.div` 
-width: min(80%, 800px);  
-display: grid;
-grid-template-columns:  repeat(3, 20px 1fr); 
-column-gap: 5rem;
-row-gap:2rem;
-margin: 2rem auto;
-`; 
-
 
 //spinner
 export const SpinnerContainer = styled.div`
@@ -232,11 +296,3 @@ height:19px;
 }
 `;
 
-//FORM
-export const FotoForm = styled.img`
-    width: 210px;
-    height: 285px;
-    margin: auto 1rem;   
-    border-radius: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  `;    

@@ -1,22 +1,33 @@
 import React from 'react';
-import { LandingGlobalStyle, LandingDiv } from '../styled';
+import { LandingGlobalStyle } from '../styles/global';
+import { LandingContainer, LandingP, LandingImgDiv, LandingLettersDiv, LandingButton } from '../styled';
 import './button.css';
+import imageBack from '../assets/games1.jpg'
 
 
 
 const Landing = () => {
   return (
     <div>
-      <LandingGlobalStyle />
-        <LandingDiv>
-          <p style={{color:"white"}}>Welcome to the facinating world of </p>
-          <p style={{color:"white", fontSize:"30px"}}> ...VIDEOGAMES</p>
-          <p style={{color:"white"}}>I'm a GAMER...so</p>
+       <LandingGlobalStyle />
+     
+        <LandingContainer>
+
+          <LandingLettersDiv>
+            <LandingP>Welcome to the facinating world of </LandingP>
+            <LandingP> ...VIDEOGAMES</LandingP>
+            <LandingP>I'm a GAMER...so</LandingP>            
+          </LandingLettersDiv>
+       
+          <LandingImgDiv>
+            <img style={{width:"100%"}} src={imageBack} alt='psp'/>
+          </LandingImgDiv>
         
-        </LandingDiv>
-        <div className="text-box">
-            <a href="/home" className="btn btn-white btn-animate">I play</a>
-          </div>   
+            <LandingButton href="/home" className="btn btn-white btn-animate">I play</LandingButton>
+         
+        
+        </LandingContainer>
+        
      
     </div>
   )

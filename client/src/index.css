@@ -1,6 +1,7 @@
 html {
   font-size: 62.5%;
   box-sizing: border-box;
+  font-family: 'Chilanka', cursive;
 }
 
 *,
@@ -11,16 +12,10 @@ html {
 
 body {
   margin: 0;
-
+  font-family: 'Chilanka', cursive;
   line-height:1rem;
   font-size: 1.1rem; 
-  min-height: 100vh; 
-  font-family: Verdana, Helvetica, sans-serif;
-
-
+  min-height: 100vh;   
+  background: #455062;
 }
 
-code {
-  font-family: source-code-pro, "Oswald", Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}

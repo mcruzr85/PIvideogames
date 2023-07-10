@@ -8,7 +8,7 @@ for(let i = 1; i<= Math.ceil(totalPosts/postPerPage); i++){ //aqui tengo un arre
 }
 //paginate viene del padre y lo que hace es cambiar la pagina actual al numero que esté en el boton {n}
   return (
-    <div style={{position: "absolute", left: "50%", transform: "translateX(-50%)", paddingBottom:"2rem", cursor:"pointer"}}>
+    <div style={{position: "absolute", left: "50%",top: "145px", transform: "translateX(-50%)", paddingBottom:"2rem", cursor:"pointer"}}>
     <nav >
       <ul style={{display:"flex"}} >
         {pageNumbers.map(n => (
