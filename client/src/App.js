@@ -22,8 +22,7 @@ function App() {
      
         {(location.pathname !== '/') && <Nav/> }
 
-      <Routes>
-        
+      <Routes>        
         <Route path="/" element={<Landing />} />
         <Route path="/home" element={<CardsContainer />} />
         <Route path="/details/:id" element={<Details />} />

@@ -112,6 +112,50 @@ export const CardBoton = styled(Boton)`
   top: 7.9rem;
   left: 0.4rem;
 `;
+//componente Form para crear un videogame
+export const Div = styled.div`
+  padding: 5px;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+`;
+
+export const MainBoton = styled(Boton)`
+  background: #d5e254;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 2px;
+  margin-top: 5px;
+
+  &:hover {
+    background: #fff;
+  }
+`;
+export const Input = styled.input`
+  border-radius: 5px;
+  border: solid 1px cadetblue;
+  padding: 5px;
+  font-weight: 700;
+  background: #c7c7c7;
+`;
+
+export const Textarea = styled.textarea`
+  border-radius: 5px;
+  border: solid 1px cadetblue;
+  padding: 5px;
+  font-weight: 700;
+  background: #c7c7c7;
+  width: 200px;
+  height: 100px;
+  resize: none;
+`;
+export const Select = styled.select`
+  border-radius: 5px;
+  border: solid 1px cadetblue;
+  padding: 5px;
+  font-weight: 700;
+  background: #c7c7c7;
+`;
 
 //componente de Landing
 
@@ -212,7 +256,7 @@ export const DetailContainer = styled.div`
 `;
 
 export const Letter = styled.h3`
-  padding-bottom: .5rem;
+  padding-bottom: 0.5rem;
 `;
 
 export const CardDetail = styled.div`
