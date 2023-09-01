@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const { DB_USER, DB_PASSWORD,
 } = process.env;
-const DB_PORT = process.env.PORT ?? 5432;
+const PORT = process.env.PORT ?? 5432;
 
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@localhost:${PORT}/videogames`, {
   logging: false, // set to console.log to see the raw SQL queries
